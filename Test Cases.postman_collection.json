@@ -1,0 +1,475 @@
+{
+	"info": {
+		"_postman_id": "a263ad23-030f-4da9-b86c-840819494f02",
+		"name": "Test Cases",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "handyman_login_test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4b7f90b-ae5f-437c-bcab-774e2f9db077",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);",
+							"});",
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \n\t\"username\": \"arinze.nnaji1\",\n\n\t\"password\": \"P@$$w0rd\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/handyman/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"handyman",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Success response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"method\": \"POST\"\n}"
+						},
+						"url": {
+							"raw": "https://postman-echo.com/post",
+							"protocol": "https",
+							"host": [
+								"postman-echo",
+								"com"
+							],
+							"path": [
+								"post"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 04 Oct 2018 13:16:50 GMT"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"21a-6y1+9dLw9Ui/9TFPCS1aNOaKU38\""
+						},
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Length",
+							"value": "376"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"args\": {},\n    \"data\": {\n        \"method\": \"POST\"\n    },\n    \"files\": {},\n    \"form\": {},\n    \"headers\": {\n        \"host\": \"postman-echo.com\",\n        \"content-length\": \"21\",\n        \"accept\": \"*/*\",\n        \"accept-encoding\": \"gzip, deflate\",\n        \"cache-control\": \"no-cache\",\n        \"content-type\": \"application/json\",\n        \"cookie\": \"sails.sid=s%3AG10mxUHVB65q6zAdIPRPk7kAxyMNpmeM.tn9m63fNTjoJBYkiUShtDIIliVwslI4ys8tvItjT2%2BA\",\n        \"postman-token\": \"e96e5264-9de6-4aa6-8737-3ab5489d561c\",\n        \"user-agent\": \"PostmanRuntime/7.3.0\",\n        \"x-forwarded-port\": \"443\",\n        \"x-forwarded-proto\": \"https\"\n    },\n    \"json\": {\n        \"method\": \"POST\"\n    },\n    \"url\": \"https://postman-echo.com/post\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get_all_handymen_test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a6d0ce5-047d-4db9-84f1-604ab2c53c38",
+						"exec": [
+							"",
+							"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200);});",
+							"",
+							"pm.test(\"Response time is less than 7000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(7000);",
+							"});",
+							"",
+							"pm.sendRequest(\"{{url}}/handyman?limit=2&skip=0\", function (err, response) {",
+							"    console.log(response.json());",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/handyman",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"handyman"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_handyman_test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4821b48b-711a-412e-a927-22048b1716aa",
+						"exec": [
+							"pm.sendRequest(\"{{url}}/handyman\", function (err, response) {",
+							"    console.log(response.json());",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"location\" : \" 3322.3322,3232\",\n\t\"username\": \"arinze.nna22jdalkadlki13\",\n\t\"hourlyRate\":\"32.2\",\n\t\"baseRate\":\"10.3\",\n\t\"occupation\" : \"carpenter\",\n\t\"email\":\"arinzennajidan22iedkdsakl2@gmail.com\",\n\t\"password\": \"P@$$w0rd\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/handyman",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"handyman"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch_handymen_by_occupation_test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2Q0YmNkNjM1MWJjODAwMTc3ODYyNzAiLCJpYXQiOjE1NTc0NjAyMzJ9.pbZqzEKux2ya3-OU5SaS64PNBkc45hKswkyaSXrgV6A"
+					},
+					{
+						"key": "",
+						"type": "text",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/handyman/carpenter",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"handyman",
+						"carpenter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_user_test",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"phoneNumber\":\"08035595773\",\n\t\"deviceId\":\"32342342432\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_order_test",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2Q0ZmM1ODk2M2IxMjZhNWMyMmJiZGEiLCJpYXQiOjE1NTc0NzQ0MjZ9.I33pTqIyb3oSKgdaBxW-Nyj3HJsrrweWgVAUdmEkW5g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"handyId\":\"5cd4fc58963b126a5c22bbda\",\n\t\"userId\":\"5cd4ff9183c71762b8bf2dd4\"\n \n}"
+				},
+				"url": {
+					"raw": "{{url}}/order",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "end_order_test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "704136df-419b-47ba-a5ef-6dcd11e0c801",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2Q0ZmM1ODk2M2IxMjZhNWMyMmJiZGEiLCJpYXQiOjE1NTc0NzQ0MjZ9.I33pTqIyb3oSKgdaBxW-Nyj3HJsrrweWgVAUdmEkW5g"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/order/end/5cd58bfb69fc420017b3a11d",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"order",
+						"end",
+						"5cd58bfb69fc420017b3a11d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "handyman_set_availability_test",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2Q0ZmFjMjZjYzY5YjAwMTcyMTMzMDciLCJpYXQiOjE1NTc0NjE2OTh9.hR_w7EMqlbJieJ5_BVgY5YbFj473XZ2wE3WOpu1VeaE"
+					},
+					{
+						"key": "",
+						"type": "text",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"available\" : true\n}"
+				},
+				"url": {
+					"raw": "{{url}}/handyman/me",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"handyman",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rate_handyman_test",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Y2Q0ZmM1ODk2M2IxMjZhNWMyMmJiZGEiLCJpYXQiOjE1NTc0NzQ0MjZ9.I33pTqIyb3oSKgdaBxW-Nyj3HJsrrweWgVAUdmEkW5g"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"handyId\":\"5cd4fc58963b126a5c22bbda\",\n\t\"userId\":\"5cd4ff9183c71762b8bf2dd4\",\n\t\"rate\": 4\n \n}"
+				},
+				"url": {
+					"raw": "{{url}}/rate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"rate"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "06d2bb9a-e55f-431e-b124-98ce9a7c4fd8",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "99d9d036-7a45-484d-9164-35ba6cdd3c7c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
